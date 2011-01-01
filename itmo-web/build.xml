@@ -1,0 +1,28 @@
+<project name="itmo-web" default="build">
+    <target name="init">
+        <property file="build.properties"/>
+
+        <property name="src.view.dir" location="${project.dir}/itmo-web"/>
+
+        <property name="build.dir" location="${project.dir}/build"/>
+        <property name="build.view.dir" location="${build.dir}/web"/>
+
+        <fileset id="view.files" dir="${src.view.dir}">
+            <include name="**/*.xml"/>
+            <include name="**/*.xsl"/>
+            <include name="**/*.css"/>
+        </fileset>
+
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${build.view.dir}"/>
+    </target>
+
+    <target name="build" depends="copy-view"/>
+
+    <target name="copy-view" depends="init">
+        <copy todir="${build.view.dir}" overwrite="true">
+            <fileset refid="view.files"/>
+        </copy>
+    </target>
+
+</project>

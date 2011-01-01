@@ -10,6 +10,22 @@
       <maximumStackSize value="2" />
       <properties />
     </buildFile>
+    <buildFile url="file://$PROJECT_DIR$/itmo-core/build.xml">
+      <additionalClassPath />
+      <antReference projectDefault="true" />
+      <customJdkName value="" />
+      <maximumHeapSize value="128" />
+      <maximumStackSize value="2" />
+      <properties />
+    </buildFile>
+    <buildFile url="file://$PROJECT_DIR$/itmo-web/build.xml">
+      <additionalClassPath />
+      <antReference projectDefault="true" />
+      <customJdkName value="" />
+      <maximumHeapSize value="128" />
+      <maximumStackSize value="2" />
+      <properties />
+    </buildFile>
   </component>
   <component name="BuildJarProjectSettings">
     <option name="BUILD_JARS_ON_MAKE" value="false" />
@@ -41,6 +57,9 @@
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
   </component>
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
+  <component name="EntryPointsManager">
+    <entry_points version="2.0" />
+  </component>
   <component name="IdProvider" IDEtalkID="43123A785CFA5A82676438C6EB1E609F" />
   <component name="InspectionProjectProfileManager">
     <profiles>
@@ -49,6 +68,7 @@
         <option name="myLocal" value="false" />
         <inspection_tool class="CssUnknownProperty" enabled="true" level="WARNING" enabled_by_default="true">
           <option name="myCustomPropertiesEnabled" value="true" />
+          <option name="myIgnoreVendorSpecificProperties" value="false" />
           <option name="myCustomPropertiesList">
             <value>
               <list size="$TEMPLATE$">
@@ -222,6 +242,9 @@
       <module fileurl="file://$PROJECT_DIR$/view/itmo-web.iml" filepath="$PROJECT_DIR$/view/itmo-web.iml" />
     </modules>
   </component>
+  <component name="ProjectResources">
+    <default-html-doctype>http://www.w3.org/1999/xhtml</default-html-doctype>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" assert-keyword="true" jdk-15="true" project-jdk-name="1.6" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
@@ -235,6 +258,7 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="" />
   </component>
+  <component name="WebServicesPlugin" addRequiredLibraries="true" />
   <component name="XPathView.XPathProjectComponent">
     <history />
     <find-history />
@@ -242,11 +266,72 @@
   <component name="libraryTable">
     <library name="xfresh-core-lib">
       <CLASSES>
+        <root url="file://$PROJECT_DIR$/xfresh/core/lib/httpclient" />
+        <root url="file://$PROJECT_DIR$/xfresh/core/lib/saxon" />
+        <root url="file://$PROJECT_DIR$/xfresh/core/lib/spring" />
+        <root url="file://$PROJECT_DIR$/xfresh/core/lib/xalan" />
+        <root url="file://$PROJECT_DIR$/xfresh/core/lib/rhino" />
+        <root url="file://$PROJECT_DIR$/xfresh/core/lib/jetty" />
+        <root url="file://$PROJECT_DIR$/xfresh/core/lib/jakarta-commons" />
         <root url="file://$PROJECT_DIR$/xfresh/core/lib" />
       </CLASSES>
       <JAVADOC />
-      <SOURCES />
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/extras/win32service/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/extras/threadpool/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/modules/jsp-2.1/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/modules/jetty/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/extras/xbean/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/modules/start/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/extras/servlet-tester/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/modules/management/src/test/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/extras/gwt/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/extras/ant/src/test/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/extras/tests/src/test/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/modules/annotations/src/test/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/modules/plus/src/test/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/modules/servlet-api-2.5/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/extras/setuid/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/modules/html/src/test/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/modules/jspc-maven-plugin/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/modules/plus/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/examples/test-jndi-webapp/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/modules/html/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/modules/annotations/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/extras/ajp/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/extras/wadi/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/modules/util/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/extras/spring/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/extras/jboss/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/extras/sessioncache/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/examples/embedded/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/modules/util/src/test/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/extras/ant/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/modules/jsp-api-2.0/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/extras/ajp/src/test/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/examples/cometd-demo/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/modules/maven-plugin/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/modules/jetty/src/test/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/extras/sslengine/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/extras/cometd/src/test/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/modules/management/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/modules/naming/src/test/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/examples/spring-ebj3-demo/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/extras/grizzly/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/extras/cometd/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/examples/test-annotations/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/extras/xbean/src/test/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/examples/test-webapp/src/main/java" />
+        <root url="jar://$PROJECT_DIR$/xfresh/core/lib/jetty/jetty-6.1.3-src.zip!/jetty-6.1.3/modules/naming/src/main/java" />
+      </SOURCES>
       <jarDirectory url="file://$PROJECT_DIR$/xfresh/core/lib" recursive="false" />
+      <jarDirectory url="file://$PROJECT_DIR$/xfresh/core/lib/httpclient" recursive="false" />
+      <jarDirectory url="file://$PROJECT_DIR$/xfresh/core/lib/jakarta-commons" recursive="false" />
+      <jarDirectory url="file://$PROJECT_DIR$/xfresh/core/lib/jetty" recursive="false" />
+      <jarDirectory url="file://$PROJECT_DIR$/xfresh/core/lib/rhino" recursive="false" />
+      <jarDirectory url="file://$PROJECT_DIR$/xfresh/core/lib/saxon" recursive="false" />
+      <jarDirectory url="file://$PROJECT_DIR$/xfresh/core/lib/spring" recursive="false" />
+      <jarDirectory url="file://$PROJECT_DIR$/xfresh/core/lib/xalan" recursive="false" />
     </library>
   </component>
 </project>
