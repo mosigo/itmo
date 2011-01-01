@@ -206,8 +206,8 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/view/view.iml" filepath="$PROJECT_DIR$/view/view.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/itmo-core.iml" filepath="$PROJECT_DIR$/core/itmo-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/view/itmo-web.iml" filepath="$PROJECT_DIR$/view/itmo-web.iml" />
     </modules>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" assert-keyword="true" jdk-15="true" project-jdk-name="1.6" project-jdk-type="JavaSDK">
