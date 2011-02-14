@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <?xml-stylesheet type="text/xsl" href="index.xsl"?>
-<page>
-    <yalet id="mainPage"/>
+<page xmlns:x="http://xfresh.sf.net/ext">
+
+    <x:auth/>
+
+    <x:http url="http://localhost:33333/mainPage"/>
+
 </page>
 

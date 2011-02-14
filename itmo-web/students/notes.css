@@ -1,0 +1,15 @@
+div.why {
+    padding-left:12px;
+    border-left: 1px solid lightgray;
+    font-size:0.9em;
+    font-style: italic;
+}
+
+div.example {
+    font-size:0.9em;
+    padding-top:12px;
+}
+
+div.intro {
+    padding-bottom:12px;
+}

@@ -1,0 +1,17 @@
+div#content div {
+    padding-bottom: 12px;
+}
+
+strong {
+    font-weight: normal;
+    color: blue;
+}
+
+em {
+    font-style:normal;
+    font-weight: bold;
+}
+
+div.task {
+    padding-bottom:12px;
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="tasks.xsl"?>
+<page xmlns:x="http://xfresh.sf.net/ext" xmlns:xi="http://www.w3.org/2001/XInclude" title="задачи">
+
+    <xi:include href="menu.xml"/>
+
+    <x:http url="http://localhost:33333/termTasks?term=2"/>
+    <x:http url="http://localhost:33333/modules?term=2"/>
+
+</page>

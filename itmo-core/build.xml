@@ -16,11 +16,18 @@
             <exclude name="junit*.jar"/>
         </fileset>
 
+        <fileset id="db-lib" dir="${db.dir}/lib">
+            <include name="**/*.jar"/>
+        </fileset>
+
         <fileset id="xfresh-core" dir="${core.dir}/build/dist" includes="*.jar"/>
+        <fileset id="xfresh-db" dir="${db.dir}/build/dist" includes="*.jar"/>
 
         <path id="project.classpath">
             <fileset refid="core-lib"/>
+            <fileset refid="db-lib"/>
             <fileset refid="xfresh-core"/>
+            <fileset refid="xfresh-db"/>
         </path>
 
         <mkdir dir="${build.dir}"/>
@@ -34,6 +41,7 @@
         <javac destdir="${build.classes.dir}"
                classpathref="project.classpath"
                debug="on"
+               debuglevel="lines,vars,source"
                srcdir="${src.java.dir}">
         </javac>
     </target>
@@ -56,7 +64,9 @@
     <target name="copy-libs" depends="init">
         <copy todir="${build.lib.dir}" flatten="true">
             <fileset refid="core-lib"/>
+            <fileset refid="db-lib"/>
             <fileset refid="xfresh-core"/>
+            <fileset refid="xfresh-db"/>
         </copy>
     </target>
 </project>

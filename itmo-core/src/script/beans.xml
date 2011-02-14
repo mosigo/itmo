@@ -3,52 +3,16 @@
  "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <beans default-autowire="byName">
-	<!--Spring helpers-->
-    <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>
 
-    <bean id="resourseBase" class="java.lang.String">
-        <constructor-arg index="0" value="./web"/>
-    </bean>
+    <import resource="itmo-core-config.xml"/>
+    <import resource="itmo-db-config.xml"/>
 
-    <!--Jetty beans-->
-    <bean id="serverInitializer" class="net.sf.xfresh.jetty.JettyServerInitializer">
-        <property name="port" value="33333"/>
-        <property name="maxThreads" value="10"/>
-        <property name="handlers">
-            <list>
-                <bean class="net.sf.xfresh.jetty.YaletXmlPageHandler">
-                    <property name="resourceBase" ref="resourseBase"/>
-                </bean>
+    <import resource="karma-config.xml"/>
+    <import resource="terms-config.xml"/>
+    <import resource="task-config.xml"/>
+    <import resource="module-config.xml"/>
+    <import resource="students-config.xml"/>
 
-                <bean class="org.mortbay.jetty.handler.MovedContextHandler">
-                    <property name="discardPathInfo" value="true"/>
-                    <property name="discardQuery" value="true"/>
-                    <property name="newContextURL" value="/index.xml"/>
-                </bean>
-
-                <bean class="org.mortbay.jetty.handler.ResourceHandler">
-                    <property name="resourceBase" ref="resourseBase"/>
-                </bean>
-
-            </list>
-        </property>
-    </bean>
-
-	<!--Fresh core beans-->
-    <bean id="yaletProcessor" class="net.sf.xfresh.core.YaletProcessor">
-        <property name="encoding" value="utf-8"/>
-    </bean>
-
-    <!--<bean id="yaletSupport" class="net.sf.xfresh.core.DefaultYaletSupport"/>-->
-    <bean id="yaletSupport" class="net.sf.xfresh.ext.ExtYaletSupport">
-        <property name="resourceBase" ref="resourseBase"/>
-    </bean>
-
-    <bean id="yaletResolver" class="net.sf.xfresh.core.SpringYaletResolver"/>
-
-    <bean id="saxGenerator" class="net.sf.xfresh.core.DefaultSaxGenerator"/>
-
-	<!--Yalets-->
-    <bean id="mainPageYalet" class="ru.obolshakova.students.itmo.MainPageYalet"/>
+    <import resource="yalets.xml"/>
 
 </beans>

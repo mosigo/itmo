@@ -9,6 +9,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="xfresh-core-lib" level="project" />
+    <orderEntry type="module" module-name="core" />
+    <orderEntry type="module" module-name="db" />
   </component>
 </module>
 

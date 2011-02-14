@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="login.xsl"?>
+<menu xmlns:x="http://xfresh.sf.net/ext">
+
+    <x:auth/>
+
+    <x:http url="http://localhost:33333/terms"/>
+
+</menu>
+

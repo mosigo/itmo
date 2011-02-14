@@ -2,17 +2,15 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0">
     <xsl:output method="html" indent="yes" encoding="windows-1251"/>
 
-    <xsl:key match="/page/items/item" name="item" use="@uid"/>
-
     <xsl:template match="/">
         <html>
         <head>
             <title>obolshakova.ru</title>
-            <!--<link type="text/css" rel="stylesheet" href="basket.css"/>-->
         </head>
         <body>
             <div style="font-family:Arial;font-size:20px;">
-                <xsl:value-of select="/page/data/string"/>
+                Возможно, здесь когда-то что-то будет.
+                Пока есть только <a href="/students/index.xml">страницы для студентов 1742 ИТМО</a>.
             </div>
         </body>
         </html>

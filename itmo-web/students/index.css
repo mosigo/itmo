@@ -1,0 +1,31 @@
+table.rasp {
+    margin-bottom: 24px;
+}
+
+div.contacts {
+    width: 50%;
+    padding-top:6px;
+    padding-bottom:12px;
+    padding-left: 12px;
+    margin-bottom:18px;
+    margin-top: 18px;
+    border-bottom: 1px solid #ffce8e;
+    border-top: 1px solid #ffce8e;
+    background-color: white;
+
+}
+
+div.contacts div {
+    padding-bottom: 6px;
+}
+
+div.contacts label {
+    padding-left: 24px;
+    padding-right: 12px;
+    text-align: right;
+    font-size: 0.8em;
+}
+
+div.contacts span {
+    font-weight: bold;
+}

@@ -6,11 +6,15 @@
 
         <property name="build.dir" location="${project.dir}/build"/>
         <property name="build.view.dir" location="${build.dir}/web"/>
+        <property name="build.view.server.dir" location="${project.dir}/xfresh/server/build/web"/>
 
         <fileset id="view.files" dir="${src.view.dir}">
             <include name="**/*.xml"/>
             <include name="**/*.xsl"/>
             <include name="**/*.css"/>
+            <include name="**/*.pdf"/>
+            <include name="**/*.zip"/>
+            <include name="**/*.ico"/>
         </fileset>
 
         <mkdir dir="${build.dir}"/>
@@ -21,6 +25,12 @@
 
     <target name="copy-view" depends="init">
         <copy todir="${build.view.dir}" overwrite="true">
+            <fileset refid="view.files"/>
+        </copy>
+    </target>
+
+    <target name="copy-view-to-server" depends="init">
+        <copy todir="${build.view.server.dir}" overwrite="true">
             <fileset refid="view.files"/>
         </copy>
     </target>
