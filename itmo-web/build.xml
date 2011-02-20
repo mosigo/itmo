@@ -15,6 +15,7 @@
             <include name="**/*.pdf"/>
             <include name="**/*.zip"/>
             <include name="**/*.ico"/>
+            <include name="**/*.png"/>
         </fileset>
 
         <mkdir dir="${build.dir}"/>

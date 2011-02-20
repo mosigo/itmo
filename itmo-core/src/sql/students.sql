@@ -284,6 +284,139 @@ insert into task_karma(task_id, karma_id) values (3, 2);
 insert into task_karma(task_id, karma_id) values (3, 3);
 insert into task_karma(task_id, karma_id) values (3, 7);
 
+insert into task(id, module_id, module_npp, name, type, body_html, homework, hidden)
+values (4, 4, 4, 'Числовые выражения', 1, "<div class=""task"">
+                    Необходимо реализовать набор классов для работы с числовыми выражениями.
+                    Выражения бывают трёх типов:
+                    <ol>
+                        <li>Состоящие из одного числа</li>
+                        <li>Представляющие функцию с одним операндом</li>
+                        <li>Представляющие выражение с двумя операндами</li>
+                    </ol>
+                </div>
+
+                <div class=""task"">
+                    Любое выражение можно ""сосчитать"", т.е. вызвать метод, возвращающий значение
+                    этого выражения. Выражение необходимо задать интерфейсом Expression с одним
+                    методом:
+<pre>
+    double calculate();
+</pre>
+                    Ниже представлена диаграмма классов, которая должна получиться. Итого 8
+                    реализаций:
+                    <ol>
+                        <li>ValueExpression — выражение-число</li>
+                        <li>SumExpression — выражение-сумма двух операндов</li>
+                        <li>MinusExpression — выражение-разность двух операндов</li>
+                        <li>MultiplyExpression — выражение-произведение двух операндов</li>
+                        <li>DivisionExpression — выражение-отношение двух операндов</li>
+                        <li>SqrtFunction — выражение-корень</li>
+                        <li>SqrFunction — выражение-квадрат</li>
+                        <li>AbsFunction — выражение-модуль</li>
+                    </ol>
+                </div>
+
+                <div class=""task"">
+                    На все 8 реализаций должен быть unit-тест, представленный классом ExpressionTest,
+                    в котором описано 8 методов по одному на каждую реализацию.
+                </div>
+                <img src=""../images/t04.png"" style=""padding:12px""/>", 0, 0);
+
+insert into task_point(task_id, point_cnt, de_item_id, descr) values (4, 1, 16, 'показано на занятии (19.02.2011) или выполнено до 24.02.2011 21:00');
+insert into task_point(task_id, point_cnt, de_item_id, descr) values (4, 1, 15, 'реализованы все выражения');
+insert into task_point(task_id, point_cnt, de_item_id, descr) values (4, 1, 14, 'написан unit-тест');
+
+insert into task_lesson (task_id, lesson_id) values (4, 4);
+
+insert into user_attendance (user_id, lesson_id, status)
+select user_id, 3 as lesson_id, 2 as status from user_term where term_id = 2 and user_id not in (8, 6, 9, 19);
+
+insert into user_attendance (user_id, lesson_id, status)
+select user_id, 3 as lesson_id, 0 as status from user_term where term_id = 2 and user_id in (8, 6, 9, 19);
+
+insert into user_attendance (user_id, lesson_id, status)
+select user_id, 4 as lesson_id, 2 as status from user_term where term_id = 2 and user_id != 8;
+
+insert into user_attendance (user_id, lesson_id, status)
+select user_id, 4 as lesson_id, 0 as status from user_term where term_id = 2 and user_id = 8;
+
+insert into user_karma (user_id, karma_id, lesson_id)
+select user_id, 8 as karma_id, 3 as lesson_id from user_term where term_id = 2 and user_id not in (8, 6, 9, 19);
+
+insert into user_karma (user_id, karma_id, lesson_id)
+select user_id, 8 as karma_id, 4 as lesson_id from user_term where term_id = 2 and user_id not in (8);
+
+insert into user_task_status (user_id, task_id, status, creation_time)
+select user_id, 4 as task_id, -1 as status, current_timestamp as creation_time
+from user_term where term_id = 2;
+
+insert into task(id, module_id, module_npp, name, type, body_html, homework, hidden)
+values (5, 4, 5, 'Изменение каталогов в svn', 1, "<div class=""task"">
+                    Требуется изменить структуру каталогов в svn-репозитории. Новая структура
+                    каталогов должна выглядеть следующим образом:
+<pre>
+    /trunk/term2-common/src/java — исходные коды
+    /trunk/term2-common/src/test — unit-тесты
+</pre>
+                    Наименование пакетов прежнее: ru.ifmo.enf.pupkin.t02.HelloWorld.
+                </div>
+                <div class=""task"">
+                    Уже имеющиеся каталоги и классы нужно удалить (перенести в новую
+                    структуру).
+                </div>", 1, 0);
+
+insert into task_point(task_id, point_cnt, de_item_id, descr) values (5, 1, 12, 'сдано вовремя (до 24.02.2011 21:00)');
+insert into task_point(task_id, point_cnt, de_item_id, descr) values (5, 1, 11, 'задание выполнено');
+insert into task_karma(task_id, karma_id) values (5, 1);
+insert into task_karma(task_id, karma_id) values (5, 2);
+insert into task_karma(task_id, karma_id) values (5, 3);
+insert into task_karma(task_id, karma_id) values (5, 7);
+
+insert into user_task_status (user_id, task_id, status, creation_time)
+select user_id, 5 as task_id, -1 as status, current_timestamp as creation_time
+from user_term where term_id = 2;
+
+insert into task(id, module_id, module_npp, name, type, body_html, homework, hidden)
+values (6, 4, 6, 'Выражения с переменной', 1, "<div class=""task"">
+                    Необходимо реализовать всё то же самое, что и в
+                    <a href=""task.xml?task=4"">задаче 4</a>, но с условием,
+                    что в выражениях могут встречаться не только числа, но
+                    и переменная x. Для получение результата выражения
+                    будет требоваться передать значение переменной x.
+                </div>
+                <div class=""task"">
+                    Можно пойти простым путём и поправить метод интерфейса
+                    Expression следующим образом:
+<pre>
+    double calculate(double x);
+</pre>
+                    Но в этом случае добавление ещё одной переменной (например, y)
+                    будет довольно дорогим. Предлагается подумать над этим и
+                    реализовать более общее решение. Тем не менее, даже указанный
+                    вариант будет принят полностью.
+                </div>
+                <div class=""task"">
+                    В присланном коде обязательно должен присутстовать unit-тест,
+                    проверяющий работу всех реализаций.
+                </div>
+                <div class=""task"">
+                    Структура каталогов и пакетов должна соответствовать
+                    <a href=""task.xml?task=5"">заданию 5</a>. В противном случае
+                    код рассматриваться не будет.
+                </div>", 1, 0);
+
+insert into task_point(task_id, point_cnt, de_item_id, descr) values (6, 1, 12, 'сдано вовремя (до 03.03.2011 21:00)');
+insert into task_point(task_id, point_cnt, de_item_id, descr) values (6, 1, 11, 'программа работает');
+insert into task_point(task_id, point_cnt, de_item_id, descr) values (6, 1, 10, 'написан unit-тест');
+insert into task_karma(task_id, karma_id) values (6, 1);
+insert into task_karma(task_id, karma_id) values (6, 2);
+insert into task_karma(task_id, karma_id) values (6, 3);
+insert into task_karma(task_id, karma_id) values (6, 7);
+
+insert into user_task_status (user_id, task_id, status, creation_time)
+select user_id, 6 as task_id, -1 as status, current_timestamp as creation_time
+from user_term where term_id = 2;
+
 CREATE TABLE karma (
     id                    INTEGER             PRIMARY KEY
   , npp                   INTEGER
@@ -352,6 +485,12 @@ insert into user_karma (user_id, karma_id, lesson_id)
 select user_id, 8 as karma_id, 1 as lesson_id from user_term where term_id = 2;
 
 insert into user_karma (user_id, karma_id, lesson_id) values (14, 4, 2);
+insert into user_karma (user_id, karma_id) values (6, 9);
+
+insert into user_karma (user_id, karma_id, lesson_id) values (3, 4, 4);
+insert into user_karma (user_id, karma_id, lesson_id) values (3, 4, 4);
+insert into user_karma (user_id, karma_id, lesson_id) values (4, 4, 4);
+insert into user_karma (user_id, karma_id, lesson_id) values (17, 4, 4);
 
 
 CREATE TABLE user_karma (

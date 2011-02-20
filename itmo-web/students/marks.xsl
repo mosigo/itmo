@@ -35,19 +35,21 @@
                 <xsl:apply-templates select="/page/data/tasks/task" mode="th"/>
             </tr>
             <xsl:apply-templates select="student" mode="tr">
-                <xsl:sort select="/page/data/students-points/student[@id=current()/@id]/points" order="descending"/>
-                <xsl:sort select="/page/data/students-points/student[@id=current()/@id]/karma" order="descending"/>
+                <xsl:sort select="/page/data/students-points/student[@id=current()/@id]/points" order="descending" data-type="number"/>
+                <xsl:sort select="/page/data/students-points/student[@id=current()/@id]/karma" order="descending" data-type="number"/>
             </xsl:apply-templates>
         </table>
     </xsl:template>
 
     <xsl:template match="task" mode="th">
-        <th>
+        <th title="{name}">
             <xsl:if test="homework = 0">
                 <xsl:attribute name="colspan">2</xsl:attribute>
                 <xsl:text>&#8226;&#160;</xsl:text>
             </xsl:if>
-            <xsl:value-of select="@id"/>
+            <a href="task/task.xml?task={@id}" class="non-visible-link">
+                <xsl:value-of select="@id"/>
+            </a>
             <xsl:if test="homework = 0">
                 <xsl:text>&#160;&#8226;</xsl:text>
             </xsl:if>
@@ -62,7 +64,7 @@
         <xsl:variable name="points"
                       select="/page/data/student-task-points/student-task-point[student-id = $student-id and task-id = $task-id]"/>
         <xsl:if test="homework = 0">
-            <td>
+            <td title="{name}">
                 <xsl:variable name="attendance" select="/page/data/students-attendance/student-attendance[student-id = $student-id and lesson-id = $lesson-id]/status"/>
                 <xsl:choose>
                     <xsl:when test="$attendance = 0">
@@ -80,7 +82,7 @@
                 </xsl:choose>
             </td>
         </xsl:if>
-        <td>
+        <td title="{name}">
             <xsl:choose>
                 <xsl:when test="$points/point-cnt = $max-points">
                     <xsl:attribute name="class">green</xsl:attribute>
@@ -88,13 +90,13 @@
                 <xsl:when test="$points/status = 5">
                     <xsl:attribute name="class">red</xsl:attribute>
                 </xsl:when>
-                <xsl:when test="$points/point-cnt &gt; 0 or $points/status != -1">
+                <xsl:when test="$points/point-cnt &gt; 0 or $points/status &gt; 1">
                     <xsl:attribute name="class">yellow</xsl:attribute>
                 </xsl:when>
             </xsl:choose>
             <xsl:choose>
                 <xsl:when test="/page/menu/data/user-info/uid = 1">
-                    <a class="user-points-link" href="task/user-points.xml?user-id={$student-id}&#38;task={$task-id}">
+                    <a class="non-visible-link" href="task/user-points.xml?user-id={$student-id}&#38;task={$task-id}">
                         <xsl:value-of select="$points/point-cnt"/>
                     </a>
                 </xsl:when>
@@ -144,7 +146,7 @@
             table td.plus {color:green;}
             table td.minus {color:red;}
             table td.zero {color:yellow;}
-            div#content a.user-points-link {color:#161514; text-decoration:none;}
+            div#content a.non-visible-link {color:#161514; text-decoration:none;}
         </style>
     </xsl:template>
 
