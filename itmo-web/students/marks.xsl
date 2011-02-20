@@ -26,21 +26,84 @@
             <tr>
                 <th>№</th>
                 <th>Студент</th>
-                <th>Баллы</th>
+                <th>
+                    <xsl:text>Баллы (</xsl:text>
+                    <xsl:value-of select="sum(/page/data/tasks/task/point-cnt)"/>
+                    <xsl:text>)</xsl:text>
+                </th>
                 <th>Карма</th>
                 <xsl:apply-templates select="/page/data/tasks/task" mode="th"/>
             </tr>
-            <xsl:apply-templates select="student" mode="tr"/>
+            <xsl:apply-templates select="student" mode="tr">
+                <xsl:sort select="/page/data/students-points/student[@id=current()/@id]/points" order="descending"/>
+                <xsl:sort select="/page/data/students-points/student[@id=current()/@id]/karma" order="descending"/>
+            </xsl:apply-templates>
         </table>
     </xsl:template>
 
     <xsl:template match="task" mode="th">
-        <th><xsl:value-of select="@id"/></th>
+        <th>
+            <xsl:if test="homework = 0">
+                <xsl:attribute name="colspan">2</xsl:attribute>
+                <xsl:text>&#8226;&#160;</xsl:text>
+            </xsl:if>
+            <xsl:value-of select="@id"/>
+            <xsl:if test="homework = 0">
+                <xsl:text>&#160;&#8226;</xsl:text>
+            </xsl:if>
+        </th>
     </xsl:template>
 
     <xsl:template match="task" mode="td">
         <xsl:param name="student-id"/>
-        <td></td>
+        <xsl:variable name="task-id" select="@id"/>
+        <xsl:variable name="lesson-id" select="lesson-id"/>
+        <xsl:variable name="max-points" select="point-cnt"/>
+        <xsl:variable name="points"
+                      select="/page/data/student-task-points/student-task-point[student-id = $student-id and task-id = $task-id]"/>
+        <xsl:if test="homework = 0">
+            <td>
+                <xsl:variable name="attendance" select="/page/data/students-attendance/student-attendance[student-id = $student-id and lesson-id = $lesson-id]/status"/>
+                <xsl:choose>
+                    <xsl:when test="$attendance = 0">
+                        <xsl:attribute name="class">red</xsl:attribute>
+                        <xsl:text>-</xsl:text>
+                    </xsl:when>
+                    <xsl:when test="$attendance = 1">
+                        <xsl:attribute name="class">yellow</xsl:attribute>
+                        <xsl:text>+</xsl:text>
+                    </xsl:when>
+                    <xsl:when test="$attendance = 2">
+                        <xsl:attribute name="class">green</xsl:attribute>
+                        <xsl:text>+</xsl:text>
+                    </xsl:when>
+                </xsl:choose>
+            </td>
+        </xsl:if>
+        <td>
+            <xsl:choose>
+                <xsl:when test="$points/point-cnt = $max-points">
+                    <xsl:attribute name="class">green</xsl:attribute>
+                </xsl:when>
+                <xsl:when test="$points/status = 5">
+                    <xsl:attribute name="class">red</xsl:attribute>
+                </xsl:when>
+                <xsl:when test="$points/point-cnt &gt; 0 or $points/status != -1">
+                    <xsl:attribute name="class">yellow</xsl:attribute>
+                </xsl:when>
+            </xsl:choose>
+            <xsl:choose>
+                <xsl:when test="/page/menu/data/user-info/uid = 1">
+                    <a class="user-points-link" href="task/user-points.xml?user-id={$student-id}&#38;task={$task-id}">
+                        <xsl:value-of select="$points/point-cnt"/>
+                    </a>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$points/point-cnt"/>
+                </xsl:otherwise>
+            </xsl:choose>
+
+        </td>
     </xsl:template>
 
     <xsl:template match="student" mode="tr">
@@ -48,19 +111,19 @@
             <xsl:variable name="student-id" select="@id"/>
             <td class="left"><xsl:value-of select="position()"/></td>
             <td class="left"><xsl:value-of select="."/></td>
-            <td><xsl:value-of select="/page/data/students-points/student[@id=$student-id]/points"/></td>
+            <td class="blue"><xsl:value-of select="/page/data/students-points/student[@id=$student-id]/points"/></td>
             <td>
                 <xsl:variable name="karma" select="/page/data/students-points/student[@id=$student-id]/karma"/>
                 <xsl:choose>
                     <xsl:when test="$karma &gt; 0">
-                        <xsl:attribute name="class">plus</xsl:attribute>
+                        <xsl:attribute name="class">blue plus</xsl:attribute>
                         <xsl:text>+</xsl:text>
                     </xsl:when>
                     <xsl:when test="$karma &lt; 0">
-                        <xsl:attribute name="class">minus</xsl:attribute>
+                        <xsl:attribute name="class">blue minus</xsl:attribute>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:attribute name="class">zero</xsl:attribute>
+                        <xsl:attribute name="class">blue zero</xsl:attribute>
                     </xsl:otherwise>
                 </xsl:choose>
                 <xsl:value-of select="$karma"/>
@@ -81,6 +144,7 @@
             table td.plus {color:green;}
             table td.minus {color:red;}
             table td.zero {color:yellow;}
+            div#content a.user-points-link {color:#161514; text-decoration:none;}
         </style>
     </xsl:template>
 

@@ -18,4 +18,6 @@ public interface TaskService {
 
     List<TaskKarmaInfo> getTaskKarma(long taskId);
 
+    List<TaskStatusInfo> getAllStatuses();
+
 }

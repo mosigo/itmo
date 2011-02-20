@@ -16,7 +16,7 @@ body {
 
 #header {
     text-align:right;
-    color:white;
+    /*color:white;*/
 }
 
 #menu {
@@ -105,6 +105,10 @@ table td.yellow {
 
 table td.red {
     background-color: #ffc0c3;
+}
+
+table td.blue {
+    background-color: #f1f1ff;
 }
 
 table.points {

@@ -143,14 +143,23 @@ public class DbTaskService implements TaskService {
     public List<TaskInfo> getAllTasks(final int termId) {
         final List<TaskInfo> result = new ArrayList<TaskInfo>(50);
         jdbcTemplate.getJdbcOperations().query(
-                "select " +
-                    "t.id, t.module_id, t.module_npp, t.name, p.point_cnt as point_cnt, k.point_cnt as karma_cnt " +
-                "from task t " +
-                "join term_module m on t.module_id = m.id " +
-                "left join (select task_id, sum(point_cnt) as point_cnt from task_point group by task_id) p on t.id = p.task_id " +
-                "left join (select tk.task_id, sum(kr.point_cnt) as point_cnt from task_karma tk join karma kr on tk.karma_id = kr.id where kr.id not in (2,3) group by tk.task_id) k on t.id = k.task_id " +
-                "where m.term_id = ? " +
-                "order by module_npp",
+                "select t.id, t.module_id, t.module_npp, t.name,\n" +
+                "       p.point_cnt as point_cnt, k.point_cnt as karma_cnt,\n" +
+                "       t.homework, tl.lesson_id\n" +
+                "from task t join term_module m on t.module_id = m.id\n" +
+                "     left join (\n" +
+                "          select task_id, sum(point_cnt) as point_cnt\n" +
+                "          from task_point\n" +
+                "          group by task_id\n" +
+                "     ) p on t.id = p.task_id\n" +
+                "     left join (\n" +
+                "          select tk.task_id, sum(kr.point_cnt) as point_cnt\n" +
+                "          from task_karma tk join karma kr on tk.karma_id = kr.id\n" +
+                "          where kr.id not in (2,3)\n" +
+                "          group by tk.task_id\n" +
+                "     ) k on t.id = k.task_id\n" +
+                "     left join task_lesson tl on t.id = tl.task_id\n" +
+                "where m.term_id = ? order by module_npp",
                 new PreparedStatementSetter() {
                     public void setValues(final PreparedStatement ps) throws SQLException {
                         ps.setLong(1, termId);
@@ -158,8 +167,25 @@ public class DbTaskService implements TaskService {
                 },
                 new RowCallbackHandler() {
                     public void processRow(final ResultSet rs) throws SQLException {
-                        final TaskInfo point = new TaskInfo(rs.getLong("id"), rs.getInt("module_id"), rs.getInt("module_npp"), rs.getString("name"), rs.getInt("point_cnt"), rs.getInt("karma_cnt"));
+                        final TaskInfo point = new TaskInfo(
+                                rs.getLong("id"), rs.getInt("module_id"), rs.getInt("module_npp"),
+                                rs.getString("name"), rs.getInt("point_cnt"), rs.getInt("karma_cnt"),
+                                rs.getInt("homework"), rs.getInt("lesson_id")
+                        );
                         result.add(point);
+                    }
+                }
+        );
+        return result;
+    }
+
+    public List<TaskStatusInfo> getAllStatuses() {
+        final List<TaskStatusInfo> result = new ArrayList<TaskStatusInfo>(TaskStatus.values().length);
+        jdbcTemplate.getJdbcOperations().query(
+                "select id, descr from task_status",
+                new RowCallbackHandler() {
+                    public void processRow(final ResultSet rs) throws SQLException {
+                        result.add(new TaskStatusInfo(rs.getInt("id"), rs.getString("descr")));
                     }
                 }
         );

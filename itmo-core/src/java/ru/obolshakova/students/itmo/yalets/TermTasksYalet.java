@@ -37,7 +37,9 @@ public class TermTasksYalet extends AbstractTaskYalet {
                             tag("module-npp", Integer.toString(task.getModuleNpp())),
                             tag("name", task.getName()),
                             tag("point-cnt", Integer.toString(task.getPointCnt())),
-                            tag("karma-cnt", Integer.toString(task.getKarmaCnt()))
+                            tag("karma-cnt", Integer.toString(task.getKarmaCnt())),
+                            tag("homework", Integer.toString(task.getType())),
+                            tag("lesson-id", Integer.toString(task.getLessonId()))
                     )
             );
         }

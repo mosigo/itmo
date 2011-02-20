@@ -9,7 +9,7 @@ exec -a "$APPLICATION" \
      -Dorg.apache.commons.logging.LogFactory=org.apache.commons.logging.impl.Log4jFactory \
      -Djavax.xml.transform.TransformerFactory=net.sf.saxon.TransformerFactoryImpl \
      -showversion -server -Xverify:none \
-     -Xmx512m -Xms128m -XX:+UseConcMarkSweepGC -XX:+HeapDumpOnOutOfMemoryError \
+     -Xmx128m -XX:+UseParallelGC -XX:+HeapDumpOnOutOfMemoryError \
      net.sf.xfresh.util.Starter beans.xml >> $APPLICATION.log 2>&1 &
 
 echo $! > $APPLICATION.pid

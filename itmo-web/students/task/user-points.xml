@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="user-points.xsl"?>
+<page xmlns:x="http://xfresh.sf.net/ext" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <xi:include href="../menu.xml"/>
+
+    <x:http url="http://localhost:33333/task"/>
+    <x:http url="http://localhost:33333/studentTaskPoint"/>
+    <x:http url="http://localhost:33333/detailedStudentTaskPoints"/>
+    <x:http url="http://localhost:33333/userInfo"/>
+
+    <x:http url="http://localhost:33333/taskStatuses"/>
+
+</page>

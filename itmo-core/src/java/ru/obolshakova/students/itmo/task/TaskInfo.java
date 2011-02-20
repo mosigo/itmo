@@ -15,13 +15,18 @@ public class TaskInfo {
     private final int pointCnt;
     private final int karmaCnt;
 
-    public TaskInfo(final long taskId, final long moduleId, final int moduleNpp, final String name, final int pointCnt, final int karmaCnt) {
+    private final int type;
+    private final int lessonId;
+
+    public TaskInfo(final long taskId, final long moduleId, final int moduleNpp, final String name, final int pointCnt, final int karmaCnt, final int type, final int lessonId) {
         this.taskId = taskId;
         this.moduleId = moduleId;
         this.moduleNpp = moduleNpp;
         this.name = name;
         this.pointCnt = pointCnt;
         this.karmaCnt = karmaCnt;
+        this.type = type;
+        this.lessonId = lessonId;
     }
 
     public long getTaskId() {
@@ -46,5 +51,13 @@ public class TaskInfo {
 
     public int getKarmaCnt() {
         return karmaCnt;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public int getLessonId() {
+        return lessonId;
     }
 }

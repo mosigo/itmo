@@ -6,9 +6,12 @@
 
     <x:http url="http://localhost:33333/students?term=2"/>
     <x:http url="http://localhost:33333/studentsPoints?term=2"/>
+    <x:http url="http://localhost:33333/studentsTaskPoints?term=2"/>
+    <x:http url="http://localhost:33333/studentsAttendance?term=2"/>
 
     <x:http url="http://localhost:33333/termTasks?term=2"/>
     <x:http url="http://localhost:33333/modules?term=2"/>
+    <!--<x:http url="http://localhost:33333/taskStatuses"/>-->
 
 </page>
 

@@ -140,6 +140,48 @@ CREATE TABLE task (
   , FOREIGN KEY (module_id) REFERENCES term_module(id)
 ) ENGINE = INNODB character set utf8;
 
+CREATE TABLE task_status (
+    id                    INTEGER           PRIMARY KEY
+  , descr                 VARCHAR(256)
+);
+
+insert into task_status (id, descr) values (-1, 'не сдано');
+insert into task_status (id, descr) values (0, 'получено, но не просмотрено');
+insert into task_status (id, descr) values (1, 'ожидает проверки');
+insert into task_status (id, descr) values (2, 'принято полностью');
+insert into task_status (id, descr) values (3, 'принято частично');
+insert into task_status (id, descr) values (4, 'не принято');
+insert into task_status (id, descr) values (5, 'срок истёк');
+
+CREATE TABLE user_task_status (
+    user_id               INTEGER
+  , task_id               INTEGER
+  , status                INTEGER           DEFAULT -1
+  , creation_time         TIMESTAMP
+  , PRIMARY KEY (user_id, task_id)
+  , FOREIGN KEY (status) REFERENCES task_status(id)
+  , FOREIGN KEY (task_id) REFERENCES task(id)
+  , FOREIGN KEY (user_id) REFERENCES user_info(user_id)
+);
+
+insert into user_task_status (user_id, task_id, status, creation_time)
+select user_id, task.id as task_id, -1 as status, current_timestamp as creation_time
+from user_term, task where term_id = 2 and task.module_id in (select module_id from term_module where term_id = 2)
+;
+
+
+
+
+CREATE TABLE user_task_status_history (
+    user_id               INTEGER
+  , task_id               INTEGER
+  , status                INTEGER
+  , creation_time         TIMESTAMP
+  , FOREIGN KEY (status) REFERENCES task_status(id)
+  , FOREIGN KEY (task_id) REFERENCES task(id)
+  , FOREIGN KEY (user_id) REFERENCES user_info(user_id)
+);
+
 CREATE TABLE task_anketa (
     task_id               INTEGER
   , npp                   INTEGER
@@ -271,14 +313,45 @@ CREATE TABLE lesson (
     id                    INTEGER              AUTO_INCREMENT        PRIMARY KEY
   , type                  INTEGER
   , name                  INTEGER
+  , module_id             INTEGER
 ) ENGINE = INNODB character set utf8;
 
-INSERT INTO lesson (id, type, name) VALUES (1, 1, '12 февраля 2011, суббота');
-INSERT INTO lesson (id, type, name) VALUES (2, 2, '12 февраля 2011, суббота');
-INSERT INTO lesson (id, type, name) VALUES (3, 1, '19 февраля 2011, суббота');
-INSERT INTO lesson (id, type, name) VALUES (4, 2, '19 февраля 2011, суббота');
-INSERT INTO lesson (id, type, name) VALUES (5, 1, '26 февраля 2011, суббота');
-INSERT INTO lesson (id, type, name) VALUES (6, 2, '26 февраля 2011, суббота');
+INSERT INTO lesson (id, type, name, module_id) VALUES (1, 1, '12 февраля 2011, суббота', 4);
+INSERT INTO lesson (id, type, name, module_id) VALUES (2, 2, '12 февраля 2011, суббота', 4);
+INSERT INTO lesson (id, type, name, module_id) VALUES (3, 1, '19 февраля 2011, суббота', 4);
+INSERT INTO lesson (id, type, name, module_id) VALUES (4, 2, '19 февраля 2011, суббота', 4);
+INSERT INTO lesson (id, type, name, module_id) VALUES (5, 1, '26 февраля 2011, суббота', 4);
+INSERT INTO lesson (id, type, name, module_id) VALUES (6, 2, '26 февраля 2011, суббота', 4);
+
+CREATE TABLE task_lesson (
+    task_id               INTEGER              PRIMARY KEY
+  , lesson_id             INTEGER
+  , FOREIGN KEY (task_id) REFERENCES task(id)
+  , FOREIGN KEY (lesson_id) REFERENCES lesson(id)
+);
+
+insert into task_lesson (task_id, lesson_id) values (1, 2);
+
+CREATE TABLE user_attendance (
+    user_id               INTEGER
+  , lesson_id             INTEGER
+  , status                INTEGER
+  , PRIMARY KEY (user_id, lesson_id)
+);
+
+insert into user_attendance (user_id, lesson_id, status)
+select user_id, 1 as lesson_id, 2 as status from user_term where term_id = 2;
+
+insert into user_attendance (user_id, lesson_id, status)
+select user_id, 2 as lesson_id, 2 as status from user_term where term_id = 2;
+
+insert into user_karma (user_id, karma_id, lesson_id)
+select user_id, 8 as karma_id, 2 as lesson_id from user_term where term_id = 2;
+
+insert into user_karma (user_id, karma_id, lesson_id)
+select user_id, 8 as karma_id, 1 as lesson_id from user_term where term_id = 2;
+
+insert into user_karma (user_id, karma_id, lesson_id) values (14, 4, 2);
 
 
 CREATE TABLE user_karma (
@@ -291,8 +364,6 @@ CREATE TABLE user_karma (
   , FOREIGN KEY (karma_id) REFERENCES karma(id)
   , FOREIGN KEY (lesson_id) REFERENCES lesson(id)
 ) ENGINE = INNODB character set utf8;
-
-
 
 CREATE TABLE user_point (
     user_id               INTEGER

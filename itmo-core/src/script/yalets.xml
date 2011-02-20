@@ -4,17 +4,29 @@
 
 <beans default-autowire="byName">
 
-    <bean id="karmaPointsYalet" class="ru.obolshakova.students.itmo.yalets.KarmaPointsYalet"/>
+    <!--terms stuff-->
     <bean id="termsYalet" class="ru.obolshakova.students.itmo.yalets.TermsYalet"/>
-
-    <bean id="taskYalet" class="ru.obolshakova.students.itmo.yalets.TaskYalet"/>
-    <bean id="termTasksYalet" class="ru.obolshakova.students.itmo.yalets.TermTasksYalet"/>
-
     <bean id="modulesYalet" class="ru.obolshakova.students.itmo.yalets.ModulesYalet"/>
 
+    <!--tasks stuff-->
+    <bean id="taskYalet" class="ru.obolshakova.students.itmo.yalets.TaskYalet"/>
+    <bean id="termTasksYalet" class="ru.obolshakova.students.itmo.yalets.TermTasksYalet"/>
+    <bean id="taskStatusesYalet" class="ru.obolshakova.students.itmo.yalets.TaskStatusesYalet"/>
+
+
+    <!--students stuff-->
+    <bean id="userInfoYalet" class="ru.obolshakova.students.itmo.yalets.UserInfoYalet"/>
     <bean id="studentsYalet" class="ru.obolshakova.students.itmo.yalets.StudentsYalet"/>
     <bean id="studentsPointsYalet" class="ru.obolshakova.students.itmo.yalets.StudentsPointsYalet"/>
+    <bean id="studentsTaskPointsYalet" class="ru.obolshakova.students.itmo.yalets.StudentsTaskPointsYalet"/>
+    <bean id="studentTaskPointYalet" class="ru.obolshakova.students.itmo.yalets.StudentTaskPointYalet"/>
+    <bean id="detailedStudentTaskPointsYalet" class="ru.obolshakova.students.itmo.yalets.DetailedStudentTaskPointsYalet"/>
+    <bean id="studentsAttendanceYalet" class="ru.obolshakova.students.itmo.yalets.StudentsAttendanceYalet"/>
+    <bean id="karmaPointsYalet" class="ru.obolshakova.students.itmo.yalets.KarmaPointsYalet"/>
 
+    <bean id="saveUserTaskPointsYalet" class="ru.obolshakova.students.itmo.yalets.SaveUserTaskPointsYalet"/>
+
+    <!--other-->
     <bean id="getExceptionYalet" class="ru.obolshakova.students.itmo.yalets.GetExceptionYalet"/>
 
     <bean id="mainPageYalet" class="ru.obolshakova.students.itmo.MainPageYalet"/>

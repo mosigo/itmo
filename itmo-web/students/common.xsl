@@ -63,7 +63,7 @@
                         <xsl:text>)</xsl:text>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:text>*</xsl:text>
+                        <span style="color:white">*</span>
                         <!--<form action="do-auth.xml">-->
                             <!--<xsl:text>login: </xsl:text>-->
                             <!--<input type="text" name="user-login" class="text"/>-->
