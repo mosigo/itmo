@@ -5,6 +5,7 @@
     <xi:include href="../menu.xml"/>
 
     <x:http url="http://localhost:33333/task"/>
+    <x:http url="http://localhost:33333/deItems?term=2"/>
 
     <!--<x:http url="http://localhost:33333/getException"/>-->
 

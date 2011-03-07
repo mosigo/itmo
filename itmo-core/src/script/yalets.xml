@@ -11,8 +11,11 @@
     <!--tasks stuff-->
     <bean id="taskYalet" class="ru.obolshakova.students.itmo.yalets.TaskYalet"/>
     <bean id="termTasksYalet" class="ru.obolshakova.students.itmo.yalets.TermTasksYalet"/>
+    <bean id="taskInfoYalet" class="ru.obolshakova.students.itmo.yalets.TaskInfoYalet"/>
     <bean id="taskStatusesYalet" class="ru.obolshakova.students.itmo.yalets.TaskStatusesYalet"/>
 
+    <bean id="saveTaskYalet" class="ru.obolshakova.students.itmo.yalets.SaveTaskYalet"/>
+    <bean id="saveTaskPointsYalet" class="ru.obolshakova.students.itmo.yalets.SaveTaskPointsYalet"/>
 
     <!--students stuff-->
     <bean id="userInfoYalet" class="ru.obolshakova.students.itmo.yalets.UserInfoYalet"/>
@@ -22,12 +25,23 @@
     <bean id="studentTaskPointYalet" class="ru.obolshakova.students.itmo.yalets.StudentTaskPointYalet"/>
     <bean id="detailedStudentTaskPointsYalet" class="ru.obolshakova.students.itmo.yalets.DetailedStudentTaskPointsYalet"/>
     <bean id="studentsAttendanceYalet" class="ru.obolshakova.students.itmo.yalets.StudentsAttendanceYalet"/>
-    <bean id="karmaPointsYalet" class="ru.obolshakova.students.itmo.yalets.KarmaPointsYalet"/>
 
     <bean id="saveUserTaskPointsYalet" class="ru.obolshakova.students.itmo.yalets.SaveUserTaskPointsYalet"/>
+    <bean id="saveStudentsAttendanceYalet" class="ru.obolshakova.students.itmo.yalets.SaveStudentsAttendanceYalet"/>
+
+    <!--points stuff-->
+    <bean id="karmaPointsYalet" class="ru.obolshakova.students.itmo.yalets.KarmaPointsYalet"/>
+    <bean id="deItemsYalet" class="ru.obolshakova.students.itmo.yalets.DeItemsYalet"/>
+    <bean id="userDePointsYalet" class="ru.obolshakova.students.itmo.yalets.UserDePointsYalet"/>
+    <bean id="userKarmaPointsYalet" class="ru.obolshakova.students.itmo.yalets.UserKarmaPointsYalet"/>
+
+    <!--lessons stuff-->
+    <bean id="lessonsYalet" class="ru.obolshakova.students.itmo.yalets.LessonsYalet"/>
 
     <!--other-->
     <bean id="getExceptionYalet" class="ru.obolshakova.students.itmo.yalets.GetExceptionYalet"/>
+
+    <bean id="svnChangesYalet" class="ru.obolshakova.students.itmo.yalets.SvnChangesYalet"/>
 
     <bean id="mainPageYalet" class="ru.obolshakova.students.itmo.MainPageYalet"/>
 

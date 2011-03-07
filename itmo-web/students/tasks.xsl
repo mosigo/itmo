@@ -7,6 +7,12 @@
     <xsl:template match="page" mode="content">
         <h2>Задачи, которые необходимо сдать за семестр</h2>
 
+        <xsl:if test="not(menu/data/no-auth) and (menu/data/user-info/uid = 1)">
+            <div>
+                <a href="task/task-edit.xml">Добавить задачу</a>
+            </div>
+        </xsl:if>
+
         <div>
             Результат любого задания - это некоторый набор файлов,
             который должен быть закоммичен в svn. Как настроить svn,

@@ -53,7 +53,7 @@ public class TaskInfo {
         return karmaCnt;
     }
 
-    public int getType() {
+    public int  getType() {
         return type;
     }
 

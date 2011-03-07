@@ -10,7 +10,9 @@ import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
-import ru.obolshakova.students.itmo.task.*;
+import ru.obolshakova.students.itmo.task.TaskKarma;
+import ru.obolshakova.students.itmo.task.TaskPoint;
+import ru.obolshakova.students.itmo.task.TaskStatus;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -194,10 +196,10 @@ public class DbUserService implements UserService {
     public List<UserAttendance> getStudentsAttendance(final long termId) {
         final List<UserAttendance> result = new ArrayList<UserAttendance>(500);
         jdbcTemplate.getJdbcOperations().query(
-                "select a.user_id, a.lesson_id, a.status\n" +
-                        "from lesson l join user_attendance a on l.id = a.lesson_id\n" +
-                        "     join term_module tm on l.module_id = tm.id and tm.term_id = ?\n" +
-                        "where l.type = 2",
+                "select a.user_id, a.lesson_id, a.status " +
+                        "from lesson l join user_attendance a on l.id = a.lesson_id " +
+                        "     join term_module tm on l.module_id = tm.id and tm.term_id = ?",
+//                        "where l.type = 2",
                 new PreparedStatementSetter() {
                     public void setValues(final PreparedStatement ps) throws SQLException {
                         ps.setLong(1, termId);
@@ -217,12 +219,50 @@ public class DbUserService implements UserService {
         return new UserDetailedTaskPoints(taskId, getTaskPoints(userId, taskId), getTaskKarma(userId, taskId));
     }
 
+    @Override
+    public void saveStudentsAttendance(final List<UserAttendance> userAttendances) {
+        final Set<Integer> lessonsIds = new HashSet<Integer>(5);
+        for (final UserAttendance attendance : userAttendances) {
+            lessonsIds.add(attendance.getLessonId());
+        }
+        transactionTemplate.execute(new TransactionCallbackWithoutResult() {
+            @Override
+            protected void doInTransactionWithoutResult(final TransactionStatus transactionStatus) {
+                final String lessonInSection = DbUtil.getInSection(lessonsIds);
+                jdbcTemplate.update("delete from user_attendance where lesson_id in " + lessonInSection);
+                jdbcTemplate.getJdbcOperations().batchUpdate(
+                        "insert into user_attendance (user_id, lesson_id, status) values (?,?,?)",
+                        new BatchPreparedStatementSetter() {
+                            @Override
+                            public void setValues(final PreparedStatement ps, final int i) throws SQLException {
+                                final UserAttendance userAttendance = userAttendances.get(i);
+                                ps.setLong(1, userAttendance.getUserId());
+                                ps.setLong(2, userAttendance.getLessonId());
+                                ps.setInt(3, userAttendance.getAttendanceType().getCode());
+                            }
+
+                            @Override
+                            public int getBatchSize() {
+                                return userAttendances.size();
+                            }
+                        }
+                );
+                jdbcTemplate.update("delete from user_karma where lesson_id in " + lessonInSection);
+                jdbcTemplate.update(
+                        "insert into user_karma (user_id, karma_id, lesson_id) " +
+                        "select user_id, 8 as karma_id, lesson_id " +
+                                "from user_attendance " +
+                                "where lesson_id in " + lessonInSection + " and status = 2");
+            }
+        });
+    }
+
     private List<TaskPoint> getTaskPoints(final long userId, final long taskId) {
         final List<TaskPoint> result = new ArrayList<TaskPoint>(5);
         jdbcTemplate.getJdbcOperations().query(
                 "select up.point_cnt, up.de_item_id, i.descr " +
-                "from user_point up join de_item i on up.de_item_id = i.id " +
-                "where user_id = ? and task_id = ?",
+                        "from user_point up join de_item i on up.de_item_id = i.id " +
+                        "where user_id = ? and task_id = ?",
                 new PreparedStatementSetter() {
                     public void setValues(final PreparedStatement ps) throws SQLException {
                         ps.setLong(1, userId);

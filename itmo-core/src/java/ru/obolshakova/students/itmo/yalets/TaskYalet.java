@@ -30,14 +30,16 @@ public class TaskYalet extends AbstractTaskYalet {
         }
         final Task task = taskService.getTask(taskId);
 
-        if (task == null || task.isHidden()) {
+        if (task == null || (req.getUserId() == null || req.getUserId() != 1L) && task.isHidden()) {
             res.add(tag("task"));
             return;
         }
 
         res.add(
                 tag("task",
-                        attribute("id", task.getId()).and("hidden", task.isHidden() ? "1" : "0"),
+                        attribute("id", task.getId())
+                                .and("hidden", task.isHidden() ? "1" : "0")
+                                .and("homework", task.isHomework() ? "1" : "0"),
                         tag("module-id", Integer.toString(task.getModuleId())),
                         tag("module-npp", Integer.toString(task.getModuleNpp())),
                         tag("name", task.getName()),
@@ -48,15 +50,14 @@ public class TaskYalet extends AbstractTaskYalet {
     }
 
     private List<Tagable> getTaskPoints(final long taskId) {
-        final List<TaskPointInfo> taskPoints = taskService.getTaskPoints(taskId);
+        final List<TaskPoint> taskPoints = taskService.getTaskPoints(taskId);
         final List<Tagable> tags = new ArrayList<Tagable>(taskPoints.size());
-        for (final TaskPointInfo taskPoint : taskPoints) {
+        for (final TaskPoint taskPoint : taskPoints) {
             tags.add(
                     tag("point",
                             tag("description", taskPoint.getDescription()),
                             tag("point-cnt", Integer.toString(taskPoint.getPointCnt())),
-                            tag("de-item-id", Integer.toString(taskPoint.getDeItemId())),
-                            tag("de-descr", taskPoint.getDeItemName())
+                            tag("de-item-id", Integer.toString(taskPoint.getDeItemId()))
                     )
             );
         }

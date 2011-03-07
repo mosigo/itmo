@@ -1,8 +1,10 @@
 package ru.obolshakova.students.itmo.yalets;
 
 import net.sf.xfresh.core.xml.Tagable;
+import ru.obolshakova.students.itmo.task.TaskInfo;
 import ru.obolshakova.students.itmo.user.UserTaskPoints;
 
+import static net.sf.xfresh.core.xml.Xmler.attribute;
 import static net.sf.xfresh.core.xml.Xmler.tag;
 
 /**
@@ -19,6 +21,20 @@ public class YaletXmlUtils {
                 tag("point-cnt", Integer.toString(point.getPointCnt())),
                 tag("karma-cnt", Integer.toString(point.getKarmaCnt())),
                 tag("status", Integer.toString(point.getStatus().getCode()))
+        );
+    }
+
+    public static Tagable taskInfo(final TaskInfo task) {
+        return tag(
+                "task",
+                attribute("id", task.getTaskId()),
+                tag("module-id", Long.toString(task.getModuleId())),
+                tag("module-npp", Integer.toString(task.getModuleNpp())),
+                tag("name", task.getName()),
+                tag("point-cnt", Integer.toString(task.getPointCnt())),
+                tag("karma-cnt", Integer.toString(task.getKarmaCnt())),
+                tag("homework", Integer.toString(task.getType())),
+                tag("lesson-id", Integer.toString(task.getLessonId()))
         );
     }
 }

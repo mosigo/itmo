@@ -1,0 +1,23 @@
+table {
+    margin-bottom:12px;
+}
+
+table th, table td {
+    vertical-align:middle;
+    text-align:center;
+}
+
+table td.first {
+    text-align:left;
+    width:200px;
+}
+
+table td.green {
+    color:green;
+    background:none;
+}
+
+table td.gray {
+    color:lightgray;
+    background:none;
+}

@@ -7,11 +7,12 @@
     <import resource="itmo-core-config.xml"/>
     <import resource="itmo-db-config.xml"/>
 
-    <import resource="karma-config.xml"/>
+    <import resource="points-config.xml"/>
     <import resource="terms-config.xml"/>
     <import resource="task-config.xml"/>
     <import resource="module-config.xml"/>
     <import resource="students-config.xml"/>
+    <import resource="lessons-config.xml"/>
 
     <import resource="yalets.xml"/>
 

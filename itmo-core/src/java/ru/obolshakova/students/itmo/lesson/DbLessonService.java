@@ -1,4 +1,4 @@
-package ru.obolshakova.students.itmo.karma;
+package ru.obolshakova.students.itmo.lesson;
 
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.jdbc.core.PreparedStatementSetter;
@@ -13,9 +13,9 @@ import java.util.List;
 
 /**
  * Author: Olga Bolshakova (obolshakova@yandex-team.ru)
- * Date: 07.01.11 22:40
+ * Date: 06.03.11 19:15
  */
-public class KarmaService {
+public class DbLessonService implements LessonService {
 
     private SimpleJdbcTemplate jdbcTemplate;
 
@@ -24,21 +24,29 @@ public class KarmaService {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<KarmaItem> loadItems() {
-        final List<KarmaItem> result = new ArrayList<KarmaItem>(50);
+    @Override
+    public List<Lesson> getLessons(final long termId) {
+        final List<Lesson> result = new ArrayList<Lesson>(30);
         jdbcTemplate.getJdbcOperations().query(
-                "SELECT id, point_cnt, descr FROM karma ORDER BY npp",
+                "select l.id, l.type, l.name, l.module_id, l.given " +
+                "from lesson l " +
+                        "join term_module m on l.module_id = m.id and m.term_id = ? " +
+                "order by l.id",
                 new PreparedStatementSetter() {
+                    @Override
                     public void setValues(final PreparedStatement ps) throws SQLException {
-                        ps.setFetchSize(100);
+                        ps.setLong(1, termId);
                     }
                 },
                 new RowCallbackHandler() {
+                    @Override
                     public void processRow(final ResultSet rs) throws SQLException {
                         final int id = rs.getInt("id");
-                        final int pointCnt = rs.getInt("point_cnt");
-                        final String description = rs.getString("descr");
-                        result.add(new KarmaItem(id, pointCnt, description));
+                        final LessonType type = LessonType.byCode(rs.getInt("type"));
+                        final String name = rs.getString("name");
+                        final int moduleId = rs.getInt("module_id");
+                        final int isGiven = rs.getInt("given");
+                        result.add(new Lesson(id, type, name, moduleId, isGiven == 1));
                     }
                 }
         );

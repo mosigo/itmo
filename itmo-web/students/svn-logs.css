@@ -1,0 +1,44 @@
+div.commit {
+    border-top:1px solid #d3d3d3;
+    /*border-bottom:1px solid #d3d3d3;*/
+    margin-top:12px;
+    padding-top:0;
+    padding-bottom:6px;
+}
+
+div.head {
+    height:32px;
+    background-color:#ccffcc;
+
+}
+
+div.date {
+    color:green;
+
+    padding-top:6px;
+    padding-bottom:6px;
+    padding-left:6px;
+    float:left;
+}
+
+div.author {
+    color:blue;
+    font-size:1.1em;
+    padding:6px;
+    /*font-weight:bold;*/
+    float:right;
+}
+
+div.comment {
+    padding-left:6px;
+}
+
+div.changes {
+    padding-left:12px;
+}
+
+div.changes {
+    font-size:0.8em;
+    color:gray;
+
+}

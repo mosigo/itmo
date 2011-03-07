@@ -4,6 +4,6 @@
 
 <beans default-autowire="byName">
 
-	<bean id="karmaService" class="ru.obolshakova.students.itmo.karma.KarmaService"/>
+	<bean id="lessonService" class="ru.obolshakova.students.itmo.lesson.DbLessonService"/>
 
 </beans>

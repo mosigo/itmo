@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="task-points.xsl"?>
+<page xmlns:x="http://xfresh.sf.net/ext" xmlns:xi="http://www.w3.org/2001/XInclude" title="баллы за задачу">
+
+    <xi:include href="../menu.xml"/>
+
+    <x:http url="http://localhost:33333/task"/>
+    <x:http url="http://localhost:33333/taskInfo?term=2"/>
+    <x:http url="http://localhost:33333/deItems?term=2"/>
+    <x:http url="http://localhost:33333/lessons?term=2"/>
+    <x:http url="http://localhost:33333/karmaPoints"/>
+
+    <x:http url="http://localhost:33333/modules?term=2"/>
+
+    <!--<x:http url="http://localhost:33333/getException"/>-->
+
+</page>

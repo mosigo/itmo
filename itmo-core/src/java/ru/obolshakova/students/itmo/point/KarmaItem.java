@@ -1,4 +1,4 @@
-package ru.obolshakova.students.itmo.karma;
+package ru.obolshakova.students.itmo.point;
 
 /**
  * Author: Olga Bolshakova (obolshakova@yandex-team.ru)

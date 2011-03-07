@@ -98,9 +98,9 @@
 
     <xsl:template match="point" mode="tr">
         <tr>
+            <xsl:variable name="de-item-id" select="de-item-id"/>
             <td>
                 <input type="checkbox" name="de-item-id" value="{de-item-id}">
-                    <xsl:variable name="de-item-id" select="de-item-id"/>
                     <xsl:if test="/page/data/detailed-student-task-points/point[de-item-id = $de-item-id]">
                         <xsl:attribute name="checked">checked</xsl:attribute>
                     </xsl:if>
@@ -109,7 +109,7 @@
             </td>
             <td><xsl:value-of select="point-cnt"/></td>
             <td><xsl:value-of select="description"/></td>
-            <td><xsl:value-of select="de-descr"/></td>
+            <td><xsl:value-of select="/page/data/de-items/de-item[@id = $de-item-id]/description"/></td>
         </tr>
     </xsl:template>
 

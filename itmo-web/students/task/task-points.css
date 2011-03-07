@@ -1,0 +1,25 @@
+table {
+    margin-top:12px;
+}
+
+input.text, textarea, select {
+    border:1px solid #d3d3d3;
+}
+
+input.text, textarea {
+    width:100%;
+}
+
+table td {
+    background-color:#fafad2;
+}
+
+input.submit {
+    font-size:1.2em;
+    margin-top:12px;
+}
+
+select {
+    margin-top:12px;
+    padding:6px;
+}

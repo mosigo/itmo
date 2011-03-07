@@ -12,12 +12,16 @@ public interface TaskService {
 
     Task getTask(long id);
 
-    List<TaskInfo> getAllTasks(int termId);
+    List<TaskInfo> getAllTasks(long termId);
 
-    List<TaskPointInfo> getTaskPoints(long taskId);
+    List<TaskPoint> getTaskPoints(long taskId);
 
     List<TaskKarmaInfo> getTaskKarma(long taskId);
 
     List<TaskStatusInfo> getAllStatuses();
+
+    void saveTask(Task task);
+
+    void saveTaskPoints(long taskId, List<TaskPoint> points, List<TaskKarma> karma, int lessonId);
 
 }

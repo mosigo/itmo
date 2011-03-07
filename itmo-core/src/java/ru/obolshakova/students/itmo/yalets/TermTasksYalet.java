@@ -30,17 +30,7 @@ public class TermTasksYalet extends AbstractTaskYalet {
         final List<Tagable> tags = new ArrayList<Tagable>(tasks.size());
         for (final TaskInfo task : tasks) {
             tags.add(
-                    tag(
-                            "task",
-                            attribute("id", task.getTaskId()),
-                            tag("module-id", Long.toString(task.getModuleId())),
-                            tag("module-npp", Integer.toString(task.getModuleNpp())),
-                            tag("name", task.getName()),
-                            tag("point-cnt", Integer.toString(task.getPointCnt())),
-                            tag("karma-cnt", Integer.toString(task.getKarmaCnt())),
-                            tag("homework", Integer.toString(task.getType())),
-                            tag("lesson-id", Integer.toString(task.getLessonId()))
-                    )
+                    YaletXmlUtils.taskInfo(task)
             );
         }
         res.add(tag("tasks", tags));

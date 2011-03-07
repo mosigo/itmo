@@ -5,6 +5,7 @@ import ru.obolshakova.students.itmo.task.TaskPoint;
 import ru.obolshakova.students.itmo.task.TaskStatus;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Author: Olga Bolshakova (obolshakova@yandex-team.ru)
@@ -29,5 +30,7 @@ public interface UserService {
     List<UserAttendance> getStudentsAttendance(long termId);
 
     void saveUserTaskPoints(long userId, long taskId, List<TaskPoint> points, List<TaskKarma> karma, TaskStatus status);
+
+    void saveStudentsAttendance(List<UserAttendance> userAttendances);
 
 }

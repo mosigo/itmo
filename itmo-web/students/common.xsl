@@ -87,6 +87,10 @@
                 <a href="/students/tasks.xml">Задачи</a>
                 <xsl:text>&#160;&#8226;&#160;</xsl:text>
                 <a href="/students/marks.xml">Баллы</a>
+                <xsl:if test="/page/menu/data/user-info and (/page/menu/data/user-info/uid = 1 or /page/menu/data/user-info/uid = 2)">
+                    <xsl:text>&#160;&#8226;&#160;</xsl:text>
+                    <a href="/students/svn-logs.xml">Коммиты</a>
+                </xsl:if>
             </div>
             <div class="terms">
                 <xsl:for-each select="/page/menu/data/terms/term">

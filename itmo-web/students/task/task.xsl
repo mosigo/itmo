@@ -30,6 +30,17 @@
                     </xsl:if>
                     <xsl:text>)</xsl:text>
                 </h2>
+                <xsl:if test="data/task/@hidden=1">
+                    <div style="color:red">!!Задание скрыто!!</div>
+                </xsl:if>
+                <xsl:if test="not(menu/data/no-auth) and (menu/data/user-info/uid = 1)">
+                    <div>
+                        <xsl:text>Редактировать </xsl:text>
+                        <a href="task-edit.xml?task={data/task/@id}">текст</a>
+                        <xsl:text> или </xsl:text>
+                        <a href="task-points.xml?task={data/task/@id}">баллы</a>
+                    </div>
+                </xsl:if>
                 <xsl:apply-templates select="data/task/points" mode="table"/>
 
                 <xsl:value-of disable-output-escaping="yes" select="data/task/body" />
@@ -69,9 +80,10 @@
 
     <xsl:template match="point" mode="tr">
         <tr>
+            <xsl:variable name="de-item-id" select="de-item-id"/>
             <td><xsl:value-of select="point-cnt"/></td>
             <td><xsl:value-of select="description"/></td>
-            <td><xsl:value-of select="de-descr"/></td>
+            <td><xsl:value-of select="/page/data/de-items/de-item[@id = $de-item-id]/description"/></td>
         </tr>
     </xsl:template>
 

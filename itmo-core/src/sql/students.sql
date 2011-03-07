@@ -417,6 +417,161 @@ insert into user_task_status (user_id, task_id, status, creation_time)
 select user_id, 6 as task_id, -1 as status, current_timestamp as creation_time
 from user_term where term_id = 2;
 
+insert into task(id, module_id, module_npp, name, type, body_html, homework, hidden)
+values (7, 4, 7, 'Итераторы', 1, "<div class=""task"">
+                    Необходимо реализовать:
+                    <ol>
+                        <li>Итератор по массиву (см. ArrayIterator ниже; метод remove() считать неподдерживаемым)</li>
+                        <li>""Фильтрующий"" итератор (см. класс Filter и FilterIterator; метод remove() считать неподдерживаемым)</li>
+                        <li>Написать реализации фильтров:</li>
+                        <ul>
+                            <li>NonEmptyStringFilter — пропускает только непустые строки</li>
+                            <li>PositiveIntegerFilter — пропускает только положительные целые цисла</li>
+                        </ul>
+                        <li>Написать unit-тесты:</li>
+                        <ul>
+                            <li>ArrayIteratorTest — на класс ArrayIterator</li>
+                            <li>FiltersTest — на обе реализации фильтров</li>
+                            <li>FilterIteratorTest — на класс FilterIterator</li>
+                        </ul>
+                    </ol>
+<pre>
+import java.util.Iterator;
+
+public class ArrayIterator&lt;E&gt; implements Iterator&lt;E&gt; {
+
+    &#160;&#160;&#160;&#160;private final E[] arr;
+
+    &#160;&#160;&#160;&#160;//возможны другие поля
+
+    &#160;&#160;&#160;&#160;public ArrayIterator(final E[] arr) {
+        &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;this.arr = arr;
+    &#160;&#160;&#160;&#160;}
+
+    &#160;&#160;&#160;&#160;public boolean hasNext() {
+        &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;//ваша реализация
+    &#160;&#160;&#160;&#160;}
+
+    &#160;&#160;&#160;&#160;public E next() {
+        &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;//ваша реализация
+    &#160;&#160;&#160;&#160;}
+
+    &#160;&#160;&#160;&#160;public void remove() {
+        &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;throw new UnsupportedOperationException();
+    &#160;&#160;&#160;&#160;}
+}
+</pre>
+<pre>
+———
+public interface Filter&lt;E&gt; {
+
+    &#160;&#160;&#160;&#160;boolean fits(E value);
+
+}
+</pre>
+<pre>
+———
+import java.util.Iterator;
+
+public class FilterIterator&lt;E&gt; implements Iterator&lt;E&gt; {
+
+&#160;&#160;&#160;&#160;private final Filter&lt;E&gt; filter;
+&#160;&#160;&#160;&#160;private final Iterator&lt;E&gt; delegate;
+
+&#160;&#160;&#160;&#160;//возможны другие поля
+
+&#160;&#160;&#160;&#160;public FilterIterator(final Filter&lt;E&gt; filter, final Iterator&lt;E&gt; delegate) {
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;this.filter = filter;
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;this.delegate = delegate;
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;//возможно что-то ещё
+&#160;&#160;&#160;&#160;}
+
+&#160;&#160;&#160;&#160;public boolean hasNext() {
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;//ваша реализация
+&#160;&#160;&#160;&#160;}
+
+&#160;&#160;&#160;&#160;public E next() {
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;//ваша реализация
+&#160;&#160;&#160;&#160;}
+
+&#160;&#160;&#160;&#160;public void remove() {
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;throw new UnsupportedOperationException();
+&#160;&#160;&#160;&#160;}
+}
+</pre>
+                </div>", 0, 0);
+
+insert into task_point(task_id, point_cnt, de_item_id, descr) values (7, 1, 16, 'показано на занятии (26.02.2011) или выполнено до 03.03.2011 21:00');
+insert into task_point(task_id, point_cnt, de_item_id, descr) values (7, 1, 15, 'реализован итератор по массиву');
+insert into task_point(task_id, point_cnt, de_item_id, descr) values (7, 1, 15, 'реализован фильтрующий итератор');
+insert into task_point(task_id, point_cnt, de_item_id, descr) values (7, 1, 14, 'написаны unit-тесты');
+
+insert into task_lesson (task_id, lesson_id) values (7, 6);
+
+insert into user_attendance (user_id, lesson_id, status)
+select user_id, 5 as lesson_id, 2 as status from user_term where term_id = 2 and user_id not in (7,9,12,16,18,19);
+
+insert into user_attendance (user_id, lesson_id, status)
+select user_id, 5 as lesson_id, 0 as status from user_term where term_id = 2 and user_id in (7,9,12,16,18,19);
+
+insert into user_attendance (user_id, lesson_id, status)
+select user_id, 6 as lesson_id, 2 as status from user_term where term_id = 2 and user_id not in (12,16);
+
+insert into user_attendance (user_id, lesson_id, status)
+select user_id, 6 as lesson_id, 0 as status from user_term where term_id = 2 and user_id in (12,16);
+
+
+
+insert into user_task_status (user_id, task_id, status, creation_time)
+select user_id, 7 as task_id, -1 as status, current_timestamp as creation_time
+from user_term where term_id = 2;
+
+insert into task(id, module_id, module_npp, name, type, body_html, homework, hidden)
+values (8, 4, 8, 'Сортированные списки', 1, "<div class=""task"">
+                    Требуется реализовать алгоритм, который по двум сортированным спискам выдаёт третий сортированный список.
+                </div>
+                <div>
+                    Обязательные условия:
+                    <ol>
+                        <li>Класс должен называться SortedListMerger и соответствовать шаблону, описанному ниже.</li>
+                        <li>Алгоритм должен работать за O(n+m), где n — длина первого списка, m — длина второго списка</li>
+                        <li>Должен быть написан unit-тест SortedListMergerTest, проверяющий работу алгоритма.</li>
+                    </ol>
+<pre>
+public class SortedListMerger&lt;E&gt; extends Comparable&lt;E&gt;&gt; {
+&#009;/**
+&#009; * Принимает на вход два сортированных списка,
+&#009; * выдаёт также сортированный список.
+&#009; * Работает за один проход по каждому из списков (O(n+m)).
+&#009; *
+&#009; * Если на вход передать несортированные списки,
+&#009; * поведение не определено.
+&#009; *
+&#009; * @param first — первый сортированный список
+&#009; * @param second — второй сортированный список
+&#009; * @return сортированный список — результат слияния входных списков
+&#009; */
+&#009;public List&lt;E&gt; merge(final List&lt;E&gt; first, final List&lt;E&gt; second){
+&#009;&#009;//ваша реализация
+&#009;}
+}
+</pre>
+                </div>", 1, 0);
+
+insert into task_point(task_id, point_cnt, de_item_id, descr) values (8, 1, 12, 'сдано вовремя (до 10.03.2011 21:00)');
+insert into task_point(task_id, point_cnt, de_item_id, descr) values (8, 1, 11, 'программа работает');
+insert into task_point(task_id, point_cnt, de_item_id, descr) values (8, 1, 10, 'написан unit-тест');
+insert into task_karma(task_id, karma_id) values (8, 1);
+insert into task_karma(task_id, karma_id) values (8, 2);
+insert into task_karma(task_id, karma_id) values (8, 3);
+insert into task_karma(task_id, karma_id) values (8, 7);
+
+insert into user_task_status (user_id, task_id, status, creation_time)
+select user_id, 8 as task_id, -1 as status, current_timestamp as creation_time
+from user_term where term_id = 2;
+
+
+
 CREATE TABLE karma (
     id                    INTEGER             PRIMARY KEY
   , npp                   INTEGER
@@ -445,7 +600,7 @@ INSERT INTO karma (id, npp, point_cnt, descr) VALUES (17, 17, -1, 'другое 
 CREATE TABLE lesson (
     id                    INTEGER              AUTO_INCREMENT        PRIMARY KEY
   , type                  INTEGER
-  , name                  INTEGER
+  , name                  VARCHAR(4000)
   , module_id             INTEGER
 ) ENGINE = INNODB character set utf8;
 
@@ -517,3 +672,17 @@ CREATE TABLE user_point (
 GRANT ALL PRIVILEGES ON itmo.* TO itmo@'%' IDENTIFIED BY 'itmo' WITH GRANT OPTION;
 
 
+alter table lesson change column name name varchar(4000);
+UPDATE lesson set name = '12 февраля 2011, суббота' where id = 1;
+UPDATE lesson set name = '12 февраля 2011, суббота' where id = 2;
+UPDATE lesson set name = '19 февраля 2011, суббота' where id = 3;
+UPDATE lesson set name = '19 февраля 2011, суббота' where id = 4;
+UPDATE lesson set name = '26 февраля 2011, суббота' where id = 5;
+UPDATE lesson set name = '26 февраля 2011, суббота' where id = 6;
+
+INSERT INTO lesson (id, type, name, module_id) VALUES (7, 1, '12 марта 2011, суббота', 4);
+INSERT INTO lesson (id, type, name, module_id) VALUES (8, 2, '12 марта 2011, суббота', 4);
+
+
+alter table lesson add column given integer default 0;
+update lesson set given = 1 where id < 7;

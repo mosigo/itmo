@@ -7,6 +7,16 @@
     <xsl:template match="page" mode="content">
         <h2>Набранные баллы</h2>
 
+        <xsl:if test="menu/data/user-info/uid = 1 or menu/data/user-info/uid = 2">
+            <div>
+                <a href="points/points.xml">Баллы для ЦДО</a>
+                <xsl:text> | </xsl:text>
+                <a href="points/attendance.xml">Отметить посещаемость</a>
+                <xsl:text> | </xsl:text>
+                <a href="points/karma.xml">Карма</a>
+            </div>
+        </xsl:if>
+
         <xsl:for-each select="data/modules/module">
             <xsl:variable name="module-id" select="@id"/>
             <xsl:if test="/page/data/tasks/task[module-id/text() = $module-id]">
@@ -48,7 +58,7 @@
                 <xsl:text>&#8226;&#160;</xsl:text>
             </xsl:if>
             <a href="task/task.xml?task={@id}" class="non-visible-link">
-                <xsl:value-of select="@id"/>
+                <xsl:value-of select="module-npp"/>
             </a>
             <xsl:if test="homework = 0">
                 <xsl:text>&#160;&#8226;</xsl:text>
@@ -128,7 +138,17 @@
                         <xsl:attribute name="class">blue zero</xsl:attribute>
                     </xsl:otherwise>
                 </xsl:choose>
-                <xsl:value-of select="$karma"/>
+                <xsl:choose>
+                    <xsl:when test="/page/menu/data/user-info and /page/menu/data/user-info/uid = 1">
+                        <a class="non-visible-link" href="points/karma.xml?student={@id}">
+                            <xsl:value-of select="$karma"/>
+                        </a>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="$karma"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+
             </td>
             <xsl:apply-templates select="/page/data/tasks/task" mode="td">
                 <xsl:with-param name="student-id" select="$student-id"/>
@@ -146,7 +166,7 @@
             table td.plus {color:green;}
             table td.minus {color:red;}
             table td.zero {color:yellow;}
-            div#content a.non-visible-link {color:#161514; text-decoration:none;}
+            div#content a.non-visible-link {color:inherit; text-decoration:none;}
         </style>
     </xsl:template>
 
