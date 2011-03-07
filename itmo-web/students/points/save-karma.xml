@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../common.xsl"?>
+<page xmlns:x="http://xfresh.sf.net/ext">
+
+    <x:http url="http://localhost:33333/addStudentKarmaPoint"/>
+
+    <x:http-redirect to="/students/marks.xml"/>
+
+</page>
+

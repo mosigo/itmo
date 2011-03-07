@@ -8,12 +8,14 @@
         <h2>Набранные баллы</h2>
 
         <xsl:if test="menu/data/user-info/uid = 1 or menu/data/user-info/uid = 2">
-            <div>
+            <div class="links">
                 <a href="points/points.xml">Баллы для ЦДО</a>
-                <xsl:text> | </xsl:text>
-                <a href="points/attendance.xml">Отметить посещаемость</a>
-                <xsl:text> | </xsl:text>
+                <xsl:text>&#160;&#160;&#160;|&#160;&#160;&#160;</xsl:text>
                 <a href="points/karma.xml">Карма</a>
+                <xsl:text>&#160;&#160;&#160;|&#160;&#160;&#160;</xsl:text>
+                <a href="points/attendance.xml">Отметить посещаемость</a>
+                <xsl:text>&#160;&#160;&#160;|&#160;&#160;&#160;</xsl:text>
+                <a href="points/karma-edit.xml">Выставить карму</a>
             </div>
         </xsl:if>
 
@@ -167,6 +169,7 @@
             table td.minus {color:red;}
             table td.zero {color:yellow;}
             div#content a.non-visible-link {color:inherit; text-decoration:none;}
+            div.links {color:#cf7808;}
         </style>
     </xsl:template>
 

@@ -17,4 +17,8 @@ public interface PointsService {
     List<UserDePoints> getStudentsDePoints(long termId);
 
     List<KarmaPoint> getStudentsKarmaPoints(long termId);
+
+    void addStudentKarmaPoint(KarmaPoint point);
+
+    void weeklyKarma(long taskId);
 }

@@ -49,10 +49,15 @@
             </td>
             <xsl:variable name="karma-item" select="/page/data/karma-items/item[id=$karma-id]"/>
             <td>
-                <xsl:if test="$karma-item/point-cnt &gt; 0">
-                    <xsl:attribute name="class">green</xsl:attribute>
-                    <xsl:text>+</xsl:text>
-                </xsl:if>
+                <xsl:choose>
+                    <xsl:when test="$karma-item/point-cnt &gt; 0">
+                        <xsl:attribute name="class">green</xsl:attribute>
+                        <xsl:text>+</xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:attribute name="class">red</xsl:attribute>
+                    </xsl:otherwise>
+                </xsl:choose>
                 <xsl:value-of select="$karma-item/point-cnt"/>
             </td>
             <td>
@@ -63,10 +68,19 @@
                 <xsl:variable name="task-id" select="task-id"/>
 
                 <xsl:variable name="task" select="/page/data/tasks/task[@id=$task-id]"/>
+                <xsl:variable name="lesson" select="/page/data/lessons/lesson[@id=$lesson-id]"/>
                 <xsl:choose>
                     <xsl:when test="$lesson-id &gt; 0">
                         <xsl:text>Занятие </xsl:text>
-                        <xsl:value-of select="/page/data/lessons/lesson[@id=$lesson-id]/name"/>
+                        <xsl:value-of select="$lesson/name"/>
+                        <xsl:choose>
+                            <xsl:when test="$lesson/type=1">
+                                <xsl:text> [лекция]</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="$lesson/type=2">
+                                <xsl:text> [практика]</xsl:text>
+                            </xsl:when>
+                        </xsl:choose>
                     </xsl:when>
                     <xsl:when test="$task-id &gt; 0">
                         <xsl:text>Задача №</xsl:text>

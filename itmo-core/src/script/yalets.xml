@@ -35,6 +35,9 @@
     <bean id="userDePointsYalet" class="ru.obolshakova.students.itmo.yalets.UserDePointsYalet"/>
     <bean id="userKarmaPointsYalet" class="ru.obolshakova.students.itmo.yalets.UserKarmaPointsYalet"/>
 
+    <bean id="addStudentKarmaPointYalet" class="ru.obolshakova.students.itmo.yalets.AddStudentKarmaPointYalet"/>
+    <bean id="weeklyKarmaYalet" class="ru.obolshakova.students.itmo.yalets.WeeklyKarmaYalet"/>
+
     <!--lessons stuff-->
     <bean id="lessonsYalet" class="ru.obolshakova.students.itmo.yalets.LessonsYalet"/>
 

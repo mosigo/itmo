@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
+import ru.obolshakova.students.itmo.task.TaskStatus;
 import ru.obolshakova.students.itmo.user.DePoint;
 import ru.obolshakova.students.itmo.user.UserDePoints;
 
@@ -135,5 +136,27 @@ public class DbPointsService implements PointsService {
                 }
         );
         return result;
+    }
+
+    @Override
+    public void addStudentKarmaPoint(final KarmaPoint point) {
+        jdbcTemplate.update(
+                "insert into user_karma (user_id, karma_id, task_id, lesson_id) values (?,?,?,?)",
+                point.getUserId(),
+                point.getKarmaId(),
+                point.getTaskId() > 0 ? point.getTaskId() : null,
+                point.getLessonId() > 0 ? point.getLessonId() : null
+        );
+    }
+
+    @Override
+    public void weeklyKarma(final long taskId) {
+        jdbcTemplate.update(
+            "insert into user_karma (user_id, karma_id, task_id) " +
+            "select user_id, 12 as karma_id, task_id " +
+                    "from user_task_status " +
+                    "where task_id = ? and status = " + TaskStatus.EXPIRED.getCode(),
+            taskId
+        );
     }
 }
